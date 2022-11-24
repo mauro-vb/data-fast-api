@@ -4,11 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import pandas as pd
 
-from taxifare.interface.main import pred
+#from taxifare.interface.main import pred
 
-from tensorflow.keras import Model, models
+from taxifare.ml_logic.registry import load_model
+
+from taxifare.ml_logic.preprocessor import preprocess_features
 
 app = FastAPI()
+app.state.model = load_model()
 
 app.add_middleware(
     CORSMiddleware,
@@ -46,7 +49,7 @@ def predict(pickup_datetime: datetime,  # 2013-07-06 17:18:00
             passenger_count=[passenger_count]
         ))
 
-    prediction = pred(input)
+    prediction = app.state.model.predict(preprocess_features(input))
     result = round(float(prediction[0][0]),2)
     return dict(fare_amount = result)
 
