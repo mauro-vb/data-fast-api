@@ -29,9 +29,9 @@ def predict(pickup_datetime: datetime,  # 2013-07-06 17:18:00
     without type hinting we need to manually convert
     the parameters of the functions which are all received as strings
     """
-    pass  # YOUR CODE HERE
+    pass
 
 
 @app.get("/")
 def root():
-    pass  # YOUR CODE HERE
+    return {'greeting': 'Hello'}
