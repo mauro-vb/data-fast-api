@@ -42,4 +42,4 @@ ENV PREFECT_LOG_LEVEL=WARNING
 
 ENV IMAGE=taxifare
 
-CMD uvicorn taxifare.api.fast:app --host 0.0.0.0 --port $PORT --reload
+CMD uvicorn taxifare.api.fast:app --host 0.0.0.0 --port ${PORT} --reload
